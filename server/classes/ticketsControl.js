@@ -1,5 +1,12 @@
 const fs = require('fs');
 
+class Ticket {
+    constructor(number, desktop) {
+        this.number = number;
+        this.desktop = desktop;
+    }
+}
+
 class TicketsControl {
     constructor() {
         this.last = 0;
