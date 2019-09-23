@@ -14,6 +14,22 @@ io.on('connection', (client) => {
     });
 
     client.emit('currentTicket', {
-        currentTicket: ticketsControl.getCurrentTicket()
+        currentTicket: ticketsControl.getCurrentTicket(),
+        lastFourTickets: ticketsControl.getLastFourTickets()
     });
+
+    client.on('attendTicket', (data, callback) => {
+        if (!data.desktop) {
+            return callback({ err: true, message: 'Desktop is necessary' });
+        }
+
+        const ticketAttend = ticketsControl.attendTicket(data.desktop);
+
+        callback(ticketAttend);
+
+        client.broadcast.emit('lastFourTickets', {
+            lastFourTickets: ticketsControl.getLastFourTickets()
+        });
+    });
+
 });
