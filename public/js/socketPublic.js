@@ -20,6 +20,8 @@ socket.on('currentTicket', (resp) => {
 
 socket.on('lastFourTickets', (resp) => {
     //console.log(resp);
+    const audio = new Audio('audio/new-ticket.mp3');
+    audio.play();
     updateLastFourTicketsInHTML(resp.lastFourTickets);
 });
 
